@@ -1,4 +1,4 @@
-package Routes
+package router
 
 import (
 	"WebHooks/dto"
@@ -11,13 +11,9 @@ func WebhookResponseRoutes(e *echo.Echo) {
 	//	return c.String(http.StatusOK, "Hello, World. Thy strength befits a crown!")
 	//})
 
-	e.GET("/", func(c echo.Context) error {
-		return c.File("util/batman.html")
-	})
-
 	e.POST("/dockerhub-hook", func(c echo.Context) error {
 		//binding json data
-		var jsonResponse dto.JSONResponse
+		var jsonResponse dto.WebhookJSONResponse
 		err := c.Bind(&jsonResponse)
 		if err != nil {
 			fmt.Println("Error:", err.Error())
